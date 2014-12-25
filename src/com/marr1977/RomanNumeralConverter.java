@@ -10,6 +10,7 @@ public class RomanNumeralConverter {
     private static final List<RomanNumeral> sortedNumerals;
 
     static {
+        // Sort the numerals in descending order
 
         sortedNumerals = Arrays.asList(RomanNumeral.values());
 
@@ -28,8 +29,18 @@ public class RomanNumeralConverter {
         });
     }
 
+    /**
+     * Returns a romal numeral string for a given value
+     *
+     * @param value
+     * @return
+     */
     public static String toRoman(long value) {
         StringBuffer buffer = new StringBuffer();
+
+        if (value < 0) {
+            throw new IllegalArgumentException("Negative numbers not supported");
+        }
 
         long left = value;
 
@@ -44,6 +55,13 @@ public class RomanNumeralConverter {
         return buffer.toString();
     }
 
+    /**
+     * Returns the value of a roman numeral
+     *
+     * @param roman
+     * @return
+     * @throws IllegalArgumentException
+     */
     public static long toNumber(String roman) throws IllegalArgumentException {
         long totalValue = 0;
         Long lastValue = null;
@@ -64,6 +82,12 @@ public class RomanNumeralConverter {
         return totalValue;
     }
 
+    /**
+     * Get the best romal numeral match for a value
+     *
+     * @param left
+     * @return
+     */
     private static String bestMatch(long left) {
         for (RomanNumeral numeral : sortedNumerals) {
             if (numeral.getValue() <= left) {
@@ -74,6 +98,10 @@ public class RomanNumeralConverter {
         throw new IllegalArgumentException();
     }
 
+    /**
+     * Defines all the roman numerals, including the allowed subtractive notations since that
+     * makes parsing much cleaner.
+     */
     public enum RomanNumeral {
         I(1),
         IV(4),
