@@ -1,4 +1,6 @@
 RomanNumeralConverter
 =====================
 
-Converts roman numeral
+Converts roman numerals to strings and vice versa
+
+
